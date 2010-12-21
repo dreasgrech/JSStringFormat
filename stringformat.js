@@ -12,7 +12,7 @@ String.format = String.format || function (format) {
 			spaces = +index.substring(index.indexOf(',') + 1);
 			index = +index.substring(0, index.indexOf(','));
 		}
-		plValue = params[index];
+		plValue = params[index] + '';
 		if (spaces) {
 			totalSpaces = new Array(Math.abs(spaces) - plValue.length + 1).join(" ");
 			plValue = spaces > 0 ? totalSpaces + plValue : plValue + totalSpaces;
@@ -22,5 +22,3 @@ String.format = String.format || function (format) {
 	}
 	return format;
 };
-
-
