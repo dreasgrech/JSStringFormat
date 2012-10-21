@@ -22,13 +22,15 @@ String.format = String.format || function (format) {
             spaces = +index.substring(index.indexOf(',') + 1);
             index = +index.substring(0, index.indexOf(','));
         }
+
         plValue = params[index] + '';
         if (spaces) {
             totalSpaces = new Array(Math.abs(spaces) - plValue.length + 1).join(" ");
-            plValue = spaces > 0 ? totalSpaces + plValue : plValue + totalSpaces;
+            plValue = spaces > 0 ? totalSpaces + plValue : plValue + totalSpaces; // TODO: isn't addition commutative...?  What the hell am I doing in this line!?
         }
+
         format = format.substring(0, nextOpen) + ((!plValue && plValue !== 0) ? "" : plValue) + format.substring(nextClose + 1);
-        nextClose = nextOpen + plValue.length - 1;
+        nextClose = nextOpen + plValue.length - 1; // See bug #2
         spaces = 0;
     }
     return format;
