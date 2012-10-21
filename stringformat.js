@@ -5,7 +5,7 @@ String.format = String.format || function (format) {
         };
 
     while ((nextOpen = format.indexOf('{', nextClose)) >= 0) {
-        if (isNaN(+format[nextOpen+1])) {
+        if (isNaN(+format[nextOpen+1])) { 
             if (format[nextOpen+1] === "{") {
                 format = removeCharAt(format, nextOpen + 1);
                 format = removeCharAt(format, format.indexOf('}', nextOpen-1));
@@ -27,7 +27,8 @@ String.format = String.format || function (format) {
             totalSpaces = new Array(Math.abs(spaces) - plValue.length + 1).join(" ");
             plValue = spaces > 0 ? totalSpaces + plValue : plValue + totalSpaces;
         }
-        format = format.substring(0, nextOpen) + ((!plValue && plValue != 0) ? "" : plValue) + format.substring(nextClose + 1);
+        format = format.substring(0, nextOpen) + ((!plValue && plValue !== 0) ? "" : plValue) + format.substring(nextClose + 1);
+        nextClose = nextOpen + plValue.length - 1;
         spaces = 0;
     }
     return format;
